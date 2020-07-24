@@ -1,22 +1,19 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-public class StringPalindrome {
+public class StringOfLength3AndStartsWithA {
 	
 	private static Scanner input;
 	
-	public static ArrayList<String> getPalindromes(ArrayList<String> stringArr){
-		ArrayList<String> result = new ArrayList<String>();
+	public static ArrayList<String> getSringsLen3AndStartWithA(ArrayList<String> stringArr){
 		
-		Predicate<String> p = (str)-> str.equals(new StringBuilder().append(str).reverse().toString());
+		ArrayList<String> result;
 		
-		for(String str : stringArr) {
-			if(p.test(str)) {
-				result.add(str);
-			}
-		}
-		
+		result = (ArrayList<String>) stringArr.stream()
+                .filter(str -> str.startsWith("a") && str.length()==3)
+                .collect(Collectors.toList());
 		return result;
 	}
 	
@@ -36,18 +33,17 @@ public class StringPalindrome {
 			stringArr.add(input.next());
 		}
 		
-		ArrayList<String> palindromeArr = getPalindromes(stringArr);
+		ArrayList<String> strLen3StratsWithA = getSringsLen3AndStartWithA(stringArr);
 		
-		if(palindromeArr.size()==0) {
-			System.out.println("There are no palindromes in given array of Strings.");
+		if(strLen3StratsWithA.size()==0) {
+			System.out.println("There are no strings with length 3 and starts with 'a'.");
 		}
 		else {
-			System.out.println("The palindromes in given array of Strings are: ");
-			for(String res: palindromeArr ) {
+			System.out.println("The strings of length 3 and starts with 'a' are: ");
+			for(String res: strLen3StratsWithA ) {
 				System.out.println(res);
 			}
 		}
-		
 	}
 
 }
